@@ -1,4 +1,4 @@
-Language model created by QuickLM on Sun Mar  2 12:45:47 EST 2025
+Language model created by QuickLM on Sun Mar  9 18:46:44 EDT 2025
 Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
 
 The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
@@ -7,33 +7,37 @@ The code that was used to produce this language model is available in Open Sourc
 Please visit http://www.speech.cs.cmu.edu/tools/ for more information
 
 The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
-This model based on a corpus of 4 sentences and 6 words
+This model based on a corpus of 5 sentences and 7 words
 
 \data\
-ngram 1=6
-ngram 2=8
-ngram 3=4
+ngram 1=7
+ngram 2=10
+ngram 3=5
 
 \1-grams:
 -0.7782 </s> -0.3010
 -0.7782 <s> -0.2218
--1.3802 COMPUTER -0.2218
--1.3802 OPEN -0.2218
--1.3802 OPERATION -0.2218
--1.3802 SEARCH -0.2218
+-1.4771 COMPUTER -0.2218
+-1.4771 MATH -0.2218
+-1.4771 OPEN -0.2218
+-1.4771 OPERATION -0.2218
+-1.4771 SEARCH -0.2218
 
 \2-grams:
--0.9031 <s> COMPUTER 0.0000
--0.9031 <s> OPEN 0.0000
--0.9031 <s> OPERATION 0.0000
--0.9031 <s> SEARCH 0.0000
+-1.0000 <s> COMPUTER 0.0000
+-1.0000 <s> MATH 0.0000
+-1.0000 <s> OPEN 0.0000
+-1.0000 <s> OPERATION 0.0000
+-1.0000 <s> SEARCH 0.0000
 -0.3010 COMPUTER </s> -0.3010
+-0.3010 MATH </s> -0.3010
 -0.3010 OPEN </s> -0.3010
 -0.3010 OPERATION </s> -0.3010
 -0.3010 SEARCH </s> -0.3010
 
 \3-grams:
 -0.3010 <s> COMPUTER </s>
+-0.3010 <s> MATH </s>
 -0.3010 <s> OPEN </s>
 -0.3010 <s> OPERATION </s>
 -0.3010 <s> SEARCH </s>

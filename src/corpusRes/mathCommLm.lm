@@ -1,0 +1,108 @@
+Language model created by QuickLM on Sun Mar  9 21:44:51 EDT 2025
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 20 sentences and 23 words
+
+\data\
+ngram 1=23
+ngram 2=41
+ngram 3=21
+
+\1-grams:
+-0.7853 </s> -0.3010
+-0.7853 <s> -0.2233
+-2.0864 BY -0.2233
+-2.0864 DIVIDED -0.2233
+-2.0864 EIGHT -0.2233
+-2.0864 FIVE -0.2233
+-2.0864 FOUR -0.2233
+-2.0864 MINUS -0.2233
+-2.0864 NINE -0.2233
+-2.0864 OF -0.2233
+-2.0864 ONE -0.2233
+-2.0864 OVER -0.2233
+-2.0864 PLUS -0.2233
+-2.0864 POINT -0.2233
+-2.0864 POWER -0.2975
+-2.0864 SEVEN -0.2233
+-2.0864 SIX -0.2233
+-2.0864 SUBTRACTED -0.2233
+-2.0864 TEN -0.2233
+-2.0864 THREE -0.2233
+-2.0864 TIMES -0.2233
+-2.0864 TWO -0.2233
+-2.0864 ZERO -0.2233
+
+\2-grams:
+-1.6021 <s> BY 0.0000
+-1.6021 <s> DIVIDED 0.0000
+-1.6021 <s> EIGHT 0.0000
+-1.6021 <s> FIVE 0.0000
+-1.6021 <s> FOUR 0.0000
+-1.6021 <s> MINUS 0.0000
+-1.6021 <s> NINE 0.0000
+-1.6021 <s> ONE 0.0000
+-1.6021 <s> OVER 0.0000
+-1.6021 <s> PLUS 0.0000
+-1.6021 <s> POINT 0.0000
+-1.6021 <s> POWER 0.0000
+-1.6021 <s> SEVEN 0.0000
+-1.6021 <s> SIX 0.0000
+-1.6021 <s> SUBTRACTED 0.0000
+-1.6021 <s> TEN 0.0000
+-1.6021 <s> THREE 0.0000
+-1.6021 <s> TIMES 0.0000
+-1.6021 <s> TWO 0.0000
+-1.6021 <s> ZERO 0.0000
+-0.3010 BY </s> -0.3010
+-0.3010 DIVIDED </s> -0.3010
+-0.3010 EIGHT </s> -0.3010
+-0.3010 FIVE </s> -0.3010
+-0.3010 FOUR </s> -0.3010
+-0.3010 MINUS </s> -0.3010
+-0.3010 NINE </s> -0.3010
+-0.3010 OF </s> -0.3010
+-0.3010 ONE </s> -0.3010
+-0.3010 OVER </s> -0.3010
+-0.3010 PLUS </s> -0.3010
+-0.3010 POINT </s> -0.3010
+-0.3010 POWER OF 0.0000
+-0.3010 SEVEN </s> -0.3010
+-0.3010 SIX </s> -0.3010
+-0.3010 SUBTRACTED </s> -0.3010
+-0.3010 TEN </s> -0.3010
+-0.3010 THREE </s> -0.3010
+-0.3010 TIMES </s> -0.3010
+-0.3010 TWO </s> -0.3010
+-0.3010 ZERO </s> -0.3010
+
+\3-grams:
+-0.3010 <s> BY </s>
+-0.3010 <s> DIVIDED </s>
+-0.3010 <s> EIGHT </s>
+-0.3010 <s> FIVE </s>
+-0.3010 <s> FOUR </s>
+-0.3010 <s> MINUS </s>
+-0.3010 <s> NINE </s>
+-0.3010 <s> ONE </s>
+-0.3010 <s> OVER </s>
+-0.3010 <s> PLUS </s>
+-0.3010 <s> POINT </s>
+-0.3010 <s> POWER OF
+-0.3010 <s> SEVEN </s>
+-0.3010 <s> SIX </s>
+-0.3010 <s> SUBTRACTED </s>
+-0.3010 <s> TEN </s>
+-0.3010 <s> THREE </s>
+-0.3010 <s> TIMES </s>
+-0.3010 <s> TWO </s>
+-0.3010 <s> ZERO </s>
+-0.3010 POWER OF </s>
+
+\end\

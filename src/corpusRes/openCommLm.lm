@@ -1,0 +1,93 @@
+Language model created by QuickLM on Sun Mar  9 20:02:12 EDT 2025
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 14 sentences and 20 words
+
+\data\
+ngram 1=20
+ngram 2=32
+ngram 3=18
+
+\1-grams:
+-0.8177 </s> -0.3010
+-0.8177 <s> -0.2293
+-1.9638 CARDS -0.2293
+-1.9638 CLOCK -0.2293
+-1.9638 CORE -0.2963
+-1.9638 CRAFT -0.2293
+-1.9638 DATA -0.2293
+-1.9638 FILES -0.2293
+-1.9638 FIRE -0.2963
+-1.9638 FLASH -0.2963
+-1.9638 FOX -0.2293
+-1.9638 IDEA -0.2293
+-1.9638 MESSAGES -0.2293
+-1.9638 MUSIC -0.2293
+-1.9638 NOTE -0.2963
+-1.9638 PAD -0.2293
+-1.9638 PASSWORD -0.2293
+-1.9638 POMODORO -0.2293
+-1.9638 SETTINGS -0.2293
+-1.9638 STEAM -0.2293
+
+\2-grams:
+-1.4472 <s> CLOCK 0.0000
+-1.4472 <s> CORE 0.0000
+-1.4472 <s> CRAFT 0.0000
+-1.4472 <s> FILES 0.0000
+-1.4472 <s> FIRE 0.0000
+-1.4472 <s> FLASH 0.0000
+-1.4472 <s> IDEA 0.0000
+-1.4472 <s> MESSAGES 0.0000
+-1.4472 <s> MUSIC 0.0000
+-1.4472 <s> NOTE 0.0000
+-1.4472 <s> PASSWORD 0.0000
+-1.4472 <s> POMODORO 0.0000
+-1.4472 <s> SETTINGS 0.0000
+-1.4472 <s> STEAM 0.0000
+-0.3010 CARDS </s> -0.3010
+-0.3010 CLOCK </s> -0.3010
+-0.3010 CORE DATA 0.0000
+-0.3010 CRAFT </s> -0.3010
+-0.3010 DATA </s> -0.3010
+-0.3010 FILES </s> -0.3010
+-0.3010 FIRE FOX 0.0000
+-0.3010 FLASH CARDS 0.0000
+-0.3010 FOX </s> -0.3010
+-0.3010 IDEA </s> -0.3010
+-0.3010 MESSAGES </s> -0.3010
+-0.3010 MUSIC </s> -0.3010
+-0.3010 NOTE PAD 0.0000
+-0.3010 PAD </s> -0.3010
+-0.3010 PASSWORD </s> -0.3010
+-0.3010 POMODORO </s> -0.3010
+-0.3010 SETTINGS </s> -0.3010
+-0.3010 STEAM </s> -0.3010
+
+\3-grams:
+-0.3010 <s> CLOCK </s>
+-0.3010 <s> CORE DATA
+-0.3010 <s> CRAFT </s>
+-0.3010 <s> FILES </s>
+-0.3010 <s> FIRE FOX
+-0.3010 <s> FLASH CARDS
+-0.3010 <s> IDEA </s>
+-0.3010 <s> MESSAGES </s>
+-0.3010 <s> MUSIC </s>
+-0.3010 <s> NOTE PAD
+-0.3010 <s> PASSWORD </s>
+-0.3010 <s> POMODORO </s>
+-0.3010 <s> SETTINGS </s>
+-0.3010 <s> STEAM </s>
+-0.3010 CORE DATA </s>
+-0.3010 FIRE FOX </s>
+-0.3010 FLASH CARDS </s>
+-0.3010 NOTE PAD </s>
+
+\end\

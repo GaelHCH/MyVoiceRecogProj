@@ -1,6 +1,7 @@
 package voicerecogpackage;
 
 import edu.cmu.sphinx.api.Configuration;
+import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
 import java.awt.*;
 import java.io.IOException;
@@ -10,22 +11,20 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class SearchCommand extends Command{
-    private String input;
 
-    public SearchCommand(String dicPath, String lmPath, Configuration configuration, String input) {
-        super(dicPath, lmPath, configuration);
-        this.input = input;
-    }
-
-    @Override
-    public boolean gatherInput() {
-        return false;
+    public SearchCommand(String dicPath, String lmPath) {
+        super(dicPath, lmPath);
     }
 
     @Override
     public boolean execute() {
-        openBrowserAndSearch(input);
-        return true;
+        while ((result = getRecognizer().getResult()) != null) {
+            inputCommand = result.getHypothesis();
+            System.out.println("Input command: " + inputCommand);
+            openBrowserAndSearch(inputCommand);
+            return true;
+        }
+        return false;
     }
 
     private static void openBrowserAndSearch(String searchTerm) {
@@ -41,5 +40,19 @@ public class SearchCommand extends Command{
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
+
+        //Other method
+//        Runtime runtime = Runtime.getRuntime();     //getting Runtime object
+//
+//        String[] s = new String[] {"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "https://javaconceptoftheday.com/"};
+//
+//        try
+//        {
+//            runtime.exec(s);        //opens "https://javaconceptoftheday.com/" in chrome browser
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 }

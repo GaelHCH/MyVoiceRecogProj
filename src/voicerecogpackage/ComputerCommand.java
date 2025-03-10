@@ -1,44 +1,47 @@
 package voicerecogpackage;
 
 import edu.cmu.sphinx.api.Configuration;
+import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 
 import java.io.IOException;
 
 public class ComputerCommand extends Command {
-    private SpeechResult input;
-    private String inputStr;
 
-    public ComputerCommand(String dicPath, String lmPath, Configuration configuration) {
-        super(dicPath, lmPath, configuration);
-    }
-
-    @Override
-    public boolean gatherInput() {
-        return false;
+    public ComputerCommand(String dicPath, String lmPath) {
+        super(dicPath, lmPath);
     }
 
     @Override
     public boolean execute() {
-        while ((input = getRecognizer().getResult()) != null) {
-            inputStr = input.getHypothesis();
-            System.out.println("Input ComputerCommand: " + inputStr);
+        while ((result = getRecognizer().getResult()) != null) {
+            inputCommand = result.getHypothesis();
+            System.out.println("Input ComputerCommand: " + inputCommand);
 
-            if (inputStr.toLowerCase().equals("sleep")) {
-                this.closeRecognizer();
+            if (inputCommand.toLowerCase().equals("sleep")) {
                 System.out.println("ComputerCommand - Sleep");
-//                sleepComputer();
+                sleepComputer();
+                closeRecognizer();
+                return true;
             }
-            else if (inputStr.toLowerCase().equals("shut off") || inputStr.toLowerCase().equals("power off") || inputStr.toLowerCase().equals("turn off") || inputStr.toLowerCase().equals("shut down") || inputStr.toLowerCase().equals("off")) {
-
+            else if (inputCommand.toLowerCase().equals("shut off") || inputCommand.toLowerCase().equals("power off") || inputCommand.toLowerCase().equals("turn off") || inputCommand.toLowerCase().equals("shut down") || inputCommand.toLowerCase().equals("off")) {
+                System.out.println("ComputerCommand - Power off");
+                shutdownComputer();
+                closeRecognizer();
+                return true;
             }
-            else if (inputStr.toLowerCase().equals("restart")) {
-
+            else if (inputCommand.toLowerCase().equals("restart")) {
+                System.out.println("ComputerCommand - Restart");
+                restartComputer();
+                closeRecognizer();
+                return true;
             }
-            else if (inputStr.toLowerCase().equals("lock")) {
-
+            else if (inputCommand.toLowerCase().equals("lock")) {
+                System.out.println("ComputerCommand - Lock");
+                lockComputer();
+                closeRecognizer();
+                return true;
             }
-
         }
         return false;
     }
@@ -51,6 +54,36 @@ public class ComputerCommand extends Command {
             Runtime.getRuntime().exec(command);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    //How to lock windows
+    private void lockComputer() {
+        try {
+            Runtime.getRuntime().exec("Rundll32.exe user32.dll,LockWorkStation");
+        }
+        catch (IOException e) {
+            // Handle potential errors
+            System.err.println("Error locking computer: " + e.getMessage());
+        }
+    }
+
+    //How to restart the computer
+    private void restartComputer() {
+        try {
+            Runtime.getRuntime().exec("shutdown /r /t 0");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //How to shut down the computer
+    private void shutdownComputer() {
+        try {
+            Runtime.getRuntime().exec("shutdown /s"); // Execute shutdown command
+        } catch (IOException e) {
+            System.err.println("Error shutting down: " + e.getMessage());
         }
     }
 }
