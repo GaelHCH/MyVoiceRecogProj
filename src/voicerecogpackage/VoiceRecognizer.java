@@ -4,28 +4,66 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
-public class VoiceRecognizer {
-    private Command startCommand;
+public class VoiceRecognizer extends JFrame implements KeyListener {
+//    private Command startCommand;
     private String startDicPath;
     private String startLmPath;
+    private Timer keyTimer;
+    private boolean cntrPressed = false;
 
     public VoiceRecognizer(String startDicPath, String startLmPath) {
+        super(""); //Doing the key istener start stuff
+
         this.startDicPath = startDicPath;
         this.startLmPath = startLmPath;
-    }
 
-    public Command getStartCommand() {
-        return startCommand;
+        //Doing the key istener start stuff
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addKeyListener(this);
     }
 
     //Init the start command
-    public void start() throws Exception {
-        startCommand = new StartCommand(startDicPath, startLmPath);
+    private void start() throws Exception {
+        StartCommand startCommand = new StartCommand(startDicPath, startLmPath);
         startCommand.initConfig();
         startCommand.initRecognizer();
         startCommand.execute();
+        System.out.println("Starting voice recognizer");
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+       if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+            cntrPressed = true;
+            System.out.println(cntrPressed);
+       }
+
+       if (cntrPressed && e.getKeyCode() == KeyEvent.VK_CAPS_LOCK) {
+           System.out.println("control capslock combo");
+           try {
+               start();
+           } catch (Exception ex) {
+               throw new RuntimeException(ex);
+           }
+       }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+            cntrPressed = false;
+        }
     }
 
 //    public static void main(String[] args) throws IOException {

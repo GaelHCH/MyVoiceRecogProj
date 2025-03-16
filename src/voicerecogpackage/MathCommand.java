@@ -2,15 +2,21 @@ package voicerecogpackage;
 
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class MathCommand extends Command {
     private int firstNumber;
     private int secondNumber;
     private String operation;
+    private String operationSymbol; //used for the gui output
     private int currStep;
+    private int mathResult;
 
     public MathCommand(String dicPath, String lmPath) {
         super(dicPath, lmPath);
         operation = "";
+        operationSymbol = "";
         currStep = 1;
     }
 
@@ -40,7 +46,14 @@ public class MathCommand extends Command {
             }
             if (currStep==4) {
                 //Finally do the calculation
-                System.out.println("Result: " + doCalculation(firstNumber, secondNumber, operation));
+                mathResult = doCalculation(firstNumber, secondNumber, operation);
+                System.out.println("Result: " + mathResult);
+
+                //Making the output show up
+                JFrame frame = new JFrame();
+                JPanel panel = new JPanel();
+                MathCommandOutput mathCommandOutput = new MathCommandOutput(frame,panel);
+                mathCommandOutput.outputResult();
                 return true;
             }
         }
@@ -52,15 +65,19 @@ public class MathCommand extends Command {
         int result = 0;
         if (operation.equals("plus")) {
             result = firstNumber + secondNumber;
+            operationSymbol = "+";
         }
         else if (operation.equals("minus") || operation.equals("subtracted by")) {
             result = firstNumber - secondNumber;
+            operationSymbol = "-";
         }
         else if (operation.equals("times")) {
             result = firstNumber * secondNumber;
+            operationSymbol = "*";
         }
         else if (operation.equals("divided by") || operation.equals("over")) {
             result = firstNumber / secondNumber;
+            operationSymbol = "/";
         }
         else if (operation.equals("power of") || operation.equals("power")) {
             for (int a = 0; a < secondNumber; a++) {
@@ -69,6 +86,7 @@ public class MathCommand extends Command {
         }
         return result;
     }
+
     //Getting the number from the str (inputCommand)
     private int getFullNumFromStr(String str) {
         String fullNumStr = "";
@@ -125,5 +143,34 @@ public class MathCommand extends Command {
             numStr += "0";
         }
         return numStr;
+    }
+
+    private class MathCommandOutput {
+        private JFrame frame;
+        private JPanel panel;
+        private JLabel label;
+
+        private MathCommandOutput(JFrame frame, JPanel panel) {
+            this.frame = frame;
+            this.panel = panel;
+        }
+
+        private void outputResult() {
+            //Initializing frame stuff
+            frame.setSize(300,200);
+            frame.setTitle("Math Output");
+            frame.setResizable(true);
+
+            //Initializing panel stuff
+            frame.add(panel);
+
+            //Initializing label with result
+            JLabel mathResultText = new JLabel(firstNumber + " " + operationSymbol + " " + secondNumber + " = " + mathResult);
+            mathResultText.setFont(new Font("SignPainter",Font.BOLD,35));
+            panel.add(mathResultText);
+
+            //making sure frame is visible
+            frame.setVisible(true);
+        }
     }
 }
