@@ -14,10 +14,12 @@ public abstract class Command {
     private Configuration configuration;
     protected SpeechResult result;
     protected String inputCommand;
+    protected boolean listening;
 
     public Command(String dicPath, String lmPath) {
         this.dicPath = dicPath;
         this.lmPath = lmPath;
+        listening = true;
     }
 
     //Initializes the model
@@ -48,5 +50,9 @@ public abstract class Command {
 
     public String getModelPath() {
         return modelPath;
+    }
+
+    public void setListening(boolean listening) {
+        this.listening = listening;
     }
 }

@@ -7,6 +7,7 @@ import edu.cmu.sphinx.api.SpeechResult;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.sound.sampled.AudioSystem;
 import java.io.IOException;
 
 public class VoiceRecognizer extends JFrame implements KeyListener {
@@ -34,7 +35,12 @@ public class VoiceRecognizer extends JFrame implements KeyListener {
         startCommand.initConfig();
         startCommand.initRecognizer();
         startCommand.execute();
-        System.out.println("Starting voice recognizer");
+        startCommand.closeRecognizer();
+//        AudioSystem.getMixer(null).close();
+//        AudioSystem.getLine(null).close();
+//        System.gc();
+        System.exit(0);
+        System.out.println("Closing voice recognizer");
     }
 
     @Override
@@ -44,28 +50,60 @@ public class VoiceRecognizer extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-       if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
-            cntrPressed = true;
-            System.out.println(cntrPressed);
-       }
+//       if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+//            cntrPressed = true;
+//            System.out.println(cntrPressed);
+//       }
+//
+//        //To start the program
+//       if (cntrPressed && e.getKeyCode() == KeyEvent.VK_CAPS_LOCK) {
+//           System.out.println("control capslock combo");
+//           try {
+//               start();
+//           } catch (Exception ex) {
+//               throw new RuntimeException(ex);
+//           }
+//       }
+//
+//       //To end the program
+//        else if (cntrPressed && e.getKeyCode() == KeyEvent.VK_SPACE) {
+//           System.out.println("control space combo");
+//           System.exit(0);
+//       }
 
-       if (cntrPressed && e.getKeyCode() == KeyEvent.VK_CAPS_LOCK) {
-           System.out.println("control capslock combo");
-           try {
-               start();
-           } catch (Exception ex) {
-               throw new RuntimeException(ex);
-           }
-       }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            System.out.println("Entered voice recognizer");
+            BeginRecognizer beginRecognizer = new BeginRecognizer(this);
+            beginRecognizer.start();
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.out.println("Exiting voice recognizer");
+            System.exit(0);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
-            cntrPressed = false;
-        }
+
     }
 
+    private class BeginRecognizer extends Thread {
+        VoiceRecognizer voiceRecognizer;
+
+        public BeginRecognizer(VoiceRecognizer voiceRecognizer) {
+            this.voiceRecognizer = voiceRecognizer;
+        }
+
+        @Override
+        public void run() {
+            try {
+                voiceRecognizer.start();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 //    public static void main(String[] args) throws IOException {
 ////        VoiceRecognizer voiceRecognizer = new VoiceRecognizer("resource:/edu/cmu/sphinx/models/en-us/en-us","resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict","resource:/edu/cmu/sphinx/models/en-us/en-us.lm.bin");
 //

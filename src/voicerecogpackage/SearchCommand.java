@@ -21,7 +21,13 @@ public class SearchCommand extends Command{
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input command: " + inputCommand);
-            openBrowserAndSearch(inputCommand);
+            if (inputCommand.toLowerCase().equals("exit")) {
+                System.out.println("Exit command");
+                return true;
+            }
+            else {
+                openBrowserAndSearch(inputCommand);
+            }
             return true;
         }
         return false;

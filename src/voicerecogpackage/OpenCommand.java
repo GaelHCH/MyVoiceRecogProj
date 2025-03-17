@@ -15,7 +15,11 @@ public class OpenCommand extends Command {
             inputCommand = result.getHypothesis();
             System.out.println("Input OpenCommand: " + inputCommand);
 
-            if (inputCommand.toLowerCase().equals("notepad") || inputCommand.toLowerCase().equals("note pad")) {
+            if (inputCommand.toLowerCase().equals("exit")) {
+                System.out.println("Exit command");
+                return true;
+            }
+            else if (inputCommand.toLowerCase().equals("notepad") || inputCommand.toLowerCase().equals("note pad")) {
                 System.out.println("OpenCommand: " + inputCommand);
                 openExeApp("notepad");
                 return true;
@@ -83,6 +87,16 @@ public class OpenCommand extends Command {
             else if (inputCommand.toLowerCase().equals("messages")) {
                 System.out.println("OpenCommand: " + inputCommand);
                 openApp("C:\\Users\\Gael\\Desktop\\WhatsApp - Shortcut.lnk");
+                return true;
+            }
+            else if (inputCommand.toLowerCase().equals("task manager") || inputCommand.toLowerCase().equals("manager")) {
+                System.out.println("OpenCommand: " + inputCommand);
+                openApp("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Task Manager.lnk");
+                return true;
+            }
+            else if (inputCommand.toLowerCase().equals("after burner") || inputCommand.toLowerCase().equals("burner")) {
+                System.out.println("OpenCommand: " + inputCommand);
+                openApp("C:\\Users\\Gael\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSI Afterburner\\MSI Afterburner.lnk");
                 return true;
             }
             else {

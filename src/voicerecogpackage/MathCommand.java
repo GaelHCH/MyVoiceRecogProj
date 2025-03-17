@@ -25,6 +25,10 @@ public class MathCommand extends Command {
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input MathCommand: " + inputCommand);
+            if (inputCommand.toLowerCase().equals("exit")) {
+                System.out.println("Exit command");
+                return true;
+            }
 
             if ((!inputCommand.equals(" ") || !inputCommand.equals("")) && currStep==1) {
                 //We're going to first listen for the first number (when currStep == 1)

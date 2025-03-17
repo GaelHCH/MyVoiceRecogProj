@@ -17,8 +17,11 @@ public class ComputerCommand extends Command {
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input ComputerCommand: " + inputCommand);
-
-            if (inputCommand.toLowerCase().equals("sleep")) {
+            if (inputCommand.toLowerCase().equals("exit")) {
+                System.out.println("Exit command");
+                return true;
+            }
+            else if (inputCommand.toLowerCase().equals("sleep")) {
                 System.out.println("ComputerCommand - Sleep");
                 sleepComputer();
                 closeRecognizer();

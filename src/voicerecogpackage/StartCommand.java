@@ -21,10 +21,11 @@ public class StartCommand extends Command {
             System.out.println("Input command: " + inputCommand);
 
             if (inputCommand.toLowerCase().equals("math")) {
-                MathCommand mathCommand = new MathCommand("src/corpusRes/mathCommDic.dic", "src/corpusRes/mathCommLm.lm");
+                MathCommand mathCommand = new MathCommand("file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/mathCommDic.dic", "file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/mathCommLm.lm"); //make these absolute paths
                 mathCommand.initConfig();
                 mathCommand.initRecognizer();
                 mathCommand.execute();
+                mathCommand.closeRecognizer();
                 return true;
             }
             else if (inputCommand.toLowerCase().equals("search")) {
@@ -32,22 +33,24 @@ public class StartCommand extends Command {
                 searchCommand.initConfig();
                 searchCommand.initRecognizer();
                 searchCommand.execute();
+                searchCommand.closeRecognizer();
                 return true;
             }
             else if (inputCommand.toLowerCase().equals("computer")) {
-
-                ComputerCommand computerCommand = new ComputerCommand("src/corpusRes/computerDic.dic","src/corpusRes/computerLm.lm");//Creating out computer command object
+                ComputerCommand computerCommand = new ComputerCommand("file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/computerDic.dic","file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/computerLm.lm");//Creating out computer command object
                 computerCommand.initConfig();
                 computerCommand.initRecognizer();
                 //Once both config and recog are initialized, then call execute
                 computerCommand.execute();
+                computerCommand.closeRecognizer();
                 return true;
             }
             else if (inputCommand.toLowerCase().equals("open")) {
-                OpenCommand openCommand = new OpenCommand("src/corpusRes/openCommDic.dic","src/corpusRes/openCommLm.lm");
+                OpenCommand openCommand = new OpenCommand("file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/openCommDic.dic","file:///C:/Users/Gael/IdeaProjects/MyVoiceRecogProj/src/corpusRes/openCommLm.lm");
                 openCommand.initConfig();
                 openCommand.initRecognizer();
                 openCommand.execute();
+                openCommand.closeRecognizer();
                 return true;
             }
         }
