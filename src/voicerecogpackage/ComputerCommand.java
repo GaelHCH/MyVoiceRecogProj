@@ -4,6 +4,8 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class ComputerCommand extends Command {
@@ -13,10 +15,14 @@ public class ComputerCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        System.out.println("Computer command execute");
+        showTalkMessage("Ready for Input");
+
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input ComputerCommand: " + inputCommand);
+
             if (inputCommand.toLowerCase().equals("exit")) {
                 System.out.println("Exit command");
                 return true;

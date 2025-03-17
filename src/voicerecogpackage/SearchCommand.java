@@ -3,6 +3,8 @@ package voicerecogpackage;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -17,10 +19,14 @@ public class SearchCommand extends Command{
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        System.out.println("Search command execute");
+        showTalkMessage("Ready for Input");
+
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input command: " + inputCommand);
+
             if (inputCommand.toLowerCase().equals("exit")) {
                 System.out.println("Exit command");
                 return true;

@@ -39,8 +39,8 @@ public class VoiceRecognizer extends JFrame implements KeyListener {
 //        AudioSystem.getMixer(null).close();
 //        AudioSystem.getLine(null).close();
 //        System.gc();
-        System.exit(0);
         System.out.println("Closing voice recognizer");
+        System.exit(0);
     }
 
     @Override

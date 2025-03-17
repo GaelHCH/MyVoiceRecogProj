@@ -2,8 +2,11 @@ package voicerecogpackage;
 
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MathCommand extends Command {
     private int firstNumber;
@@ -12,6 +15,7 @@ public class MathCommand extends Command {
     private String operationSymbol; //used for the gui output
     private int currStep;
     private int mathResult;
+    private JLabel mathCalculationLabel;
 
     public MathCommand(String dicPath, String lmPath) {
         super(dicPath, lmPath);
@@ -21,10 +25,14 @@ public class MathCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        System.out.println("Math command execute");
+        showTalkMessage("Say First Number");
+
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input MathCommand: " + inputCommand);
+
             if (inputCommand.toLowerCase().equals("exit")) {
                 System.out.println("Exit command");
                 return true;
@@ -35,18 +43,24 @@ public class MathCommand extends Command {
                 firstNumber = getFullNumFromStr(inputCommand);
                 System.out.println("First Number: " + firstNumber);
                 currStep++;
+                removeTalkMessage();
+                showTalkMessage("Say Math Operation");
             }
             else if ((!inputCommand.equals(" ") || !inputCommand.equals("")) && currStep==2) {
                 //We're then going to listen for the type of the operation
                 operation = inputCommand.toLowerCase();
                 System.out.println("Operation: " + operation);
                 currStep++;
+                doCalculation(firstNumber,secondNumber,operation); //this is to get operation symbol
+                removeTalkMessage();
+                showTalkMessage("Say Second Number");
             }
             else if ((!inputCommand.equals(" ") || !inputCommand.equals("")) && currStep==3) {
                 //Now efore doing the operation, we're going to listen to the second number
                 secondNumber = getFullNumFromStr(inputCommand);
                 System.out.println("Second Number: " + secondNumber);
                 currStep++;
+                removeTalkMessage();
             }
             if (currStep==4) {
                 //Finally do the calculation
@@ -58,7 +72,7 @@ public class MathCommand extends Command {
                 JPanel panel = new JPanel();
                 MathCommandOutput mathCommandOutput = new MathCommandOutput(frame,panel);
                 mathCommandOutput.outputResult();
-                return true;
+//                return true;
             }
         }
         return false;
@@ -149,10 +163,42 @@ public class MathCommand extends Command {
         return numStr;
     }
 
+    //Overrides the show message from command to show a new label containing calculation
+    @Override
+    public void showTalkMessage(String message) {
+        super.showTalkMessage(message);
+
+        getMessageFrame().setVisible(false); //preparing our frame for changes
+
+        //Initializing our new label
+        if (currStep==1) {
+            mathCalculationLabel = new JLabel(firstNumber + "");
+        }
+        else if (currStep==2) {
+            getMessagePanel().remove(mathCalculationLabel);
+            mathCalculationLabel.setText(firstNumber + " " + operationSymbol);
+        }
+        else if (currStep==3) {
+            mathCalculationLabel = new JLabel(firstNumber + " " + operationSymbol);
+        }
+
+        mathCalculationLabel.setPreferredSize(new Dimension(150,50));
+        getMessagePanel().add(mathCalculationLabel);
+
+        getMessageFrame().setVisible(true);
+    }
+
+    //Overrides the remove message from command to also reset our new mathCalculationLabel
+    @Override
+    public void removeTalkMessage() {
+        super.removeTalkMessage();
+        getMessagePanel().remove(mathCalculationLabel);
+    }
+
+    //Outputs the result in a GUI
     private class MathCommandOutput {
         private JFrame frame;
         private JPanel panel;
-        private JLabel label;
 
         private MathCommandOutput(JFrame frame, JPanel panel) {
             this.frame = frame;
@@ -163,6 +209,7 @@ public class MathCommand extends Command {
             //Initializing frame stuff
             frame.setSize(300,200);
             frame.setTitle("Math Output");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setResizable(true);
 
             //Initializing panel stuff

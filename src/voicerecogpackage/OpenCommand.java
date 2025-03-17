@@ -1,5 +1,7 @@
 package voicerecogpackage;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -10,7 +12,10 @@ public class OpenCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws IOException, InterruptedException {
+    public boolean execute() throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
+        System.out.println("Open command execute");
+        showTalkMessage("Ready for Input");
+
         while ((result = getRecognizer().getResult()) != null) {
             inputCommand = result.getHypothesis();
             System.out.println("Input OpenCommand: " + inputCommand);
